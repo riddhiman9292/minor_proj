@@ -5,11 +5,11 @@ const http = require('http');
 app.set('view engine','ejs');
 app.enable('trust proxy');
 app.use(cors());
-app.get('/sample',(req,res)=>{
-    console.log(req.socket.remoteAddress);
+app.get('/sample',async (req,res)=>{
+    console.log(req.ip);
     res.send('ok');
 });
 const server = http.createServer(app);
-server.listen(3000,()=>{
+server.listen(process.env.PORT,()=>{
     console.log('Listening');
 })
