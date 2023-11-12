@@ -10,6 +10,6 @@ app.get('/sample',async (req,res)=>{
     res.send('ok');
 });
 const server = http.createServer(app);
-server.listen(process.env.PORT,()=>{
+server.listen(3000,()=>{
     console.log('Listening');
 })
