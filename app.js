@@ -17,7 +17,7 @@ app.get('/sample',async (req,res)=>{
         res.status(200).send({
             Message:`wrong`,
             ip:`${req.ip}`,
-            valid:verified_ip
+            valid:verified_ips
         })
     }
 });
