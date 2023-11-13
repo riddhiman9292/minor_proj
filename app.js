@@ -7,10 +7,17 @@ const {verified_ip} = require('./config');
 app.enable('trust proxy');
 app.use(cors());
 app.get('/sample',async (req,res)=>{
-    if(req){
+    if(req.ip in verified_ip){
         res.status(200).send({
             Message:`ok`,
             ip:`${req.ip}`
+        })
+    }
+    else{
+        res.status(200).send({
+            Message:`wrong`,
+            ip:`${req.ip}`,
+            valid:verified_ip
         })
     }
 });
