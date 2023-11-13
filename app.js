@@ -3,11 +3,11 @@ const app = express();
 const cors = require('cors');
 const http = require('http');
 app.set('view engine','ejs');
-const {verified_ip} = require('./config');
+const {verified_ips} = require('./config');
 app.enable('trust proxy');
 app.use(cors());
 app.get('/sample',async (req,res)=>{
-    if(req.ip in verified_ip){
+    if(req.ip in verified_ips){
         res.status(200).send({
             Message:`ok`,
             ip:`${req.ip}`
