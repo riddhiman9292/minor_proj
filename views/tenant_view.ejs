@@ -9,21 +9,32 @@
 <body>
     <button type="button" class="btn btn-primary" id="location-dialog">Checking Your Location...Getting IP</button>
     <label for="basic-url">Your Current IP: </label>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3"></span>
-  </div>
-  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" id="IP">
-</div>
+    <button class="btn btn-primary" id="IP"></button>
     <script>
     async function ipRefresher(){
-        const locbutton = document.querySelector('#location-dialog')
-        const loc = await fetch('https://loc-service.onrender.com/sample');
-        const response = await loc.json();
+        const locbutton = document.querySelector('#location-dialog');
+
+        try {
+                    const loc = await fetch('https://loc-service.onrender.com/sample');
+            const response = await loc.json();
         if(response){
+            console.log(response);
             if(response.Message==='ok'){
                 locbutton.className = 'btn btn-success';
                 locbutton.innerHTML = '<h4>approved</h4>';
+                document.querySelector('#IP').innerHTML = `<h4>${response.ip}</h4>`;
+            }
+            else{
+            locbutton.className = 'btn btn-danger';
+                locbutton.innerHTML = '<h4>Unapproved Location</h4>';
+                document.querySelector('#IP').innerHTML = `nil`;
+        }
+        }   
+        } catch (error) {
+            if(error){
+                locbutton.className = 'btn btn-danger';
+                    locbutton.innerHTML = '<h4>Unapproved Location</h4>';
+                    document.querySelector('#IP').innerHTML = `nil`;              
             }
         }
     }
