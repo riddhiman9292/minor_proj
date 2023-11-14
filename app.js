@@ -24,6 +24,13 @@ app.get('/sample',async (req,res)=>{
         })
     }
 });
+app.get('/addNewIp',async (req,res)=>{
+    verified_ips.push(req.query.new_ip);
+    res.status(200).send({
+        Message:'ok',
+        valid_ips:verified_ips
+    });
+})
 app.get('/home',async (req,res)=>{
     res.render('tenant_view');
 })
